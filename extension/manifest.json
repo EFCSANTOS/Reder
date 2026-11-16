@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "Reder – Redirecionador de sites",
+  "short_name": "Reder",
+  "version": "1.0.0",
+  "description": "Redireciona automaticamente (ou manualmente) um site para outro, com listas de regras x → y.",
+  "minimum_chrome_version": "111",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "Reder",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
+  "options_page": "options.html",
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": ["declarativeNetRequest", "storage", "tabs", "contextMenus"],
+  "host_permissions": ["<all_urls>"],
+  "commands": {
+    "redirect-current": {
+      "suggested_key": { "default": "Alt+Shift+R" },
+      "description": "Redirecionar a aba atual (se houver regra)"
+    },
+    "redirect-all": {
+      "description": "Aplicar as regras em todas as abas abertas"
+    }
+  }
+}

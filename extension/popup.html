@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Reder</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { width: 360px; }
+    header { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid var(--border); background: var(--card); }
+    header img { width: 22px; height: 22px; }
+    header h1 { font-size: 16px; flex: 1; }
+    main { padding: 12px 14px; display: grid; gap: 12px; }
+    .site { font-weight: 600; word-break: break-all; }
+    .match { display: grid; gap: 8px; }
+    .target { word-break: break-all; font-size: 12px; }
+    .lists { display: grid; gap: 6px; }
+    .lists label { display: flex; align-items: center; gap: 8px; }
+    .lists .count { margin-left: auto; }
+    form { display: grid; gap: 8px; }
+    footer { display: flex; gap: 8px; padding: 0 14px 14px; }
+    footer button { flex: 1; }
+    #status { min-height: 1em; }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="icons/icon32.png" alt="">
+    <h1>Reder</h1>
+    <span class="small muted" id="globalLabel">Ligado</span>
+    <label class="switch" title="Ligar/desligar todos os redirecionamentos">
+      <input type="checkbox" id="globalToggle"><span></span>
+    </label>
+  </header>
+
+  <main>
+    <section class="card match" id="current">
+      <div class="small muted">Página atual</div>
+      <div class="site" id="site">—</div>
+      <div id="matchInfo" hidden>
+        <div class="small muted" id="matchLabel"></div>
+        <div class="target" id="matchTarget"></div>
+      </div>
+      <button class="primary" id="redirectNow" hidden>Redirecionar agora</button>
+    </section>
+
+    <section class="card" id="quickAdd">
+      <form id="addForm">
+        <div class="small muted">Redirecionar este site para…</div>
+        <input type="text" id="addFrom" placeholder="origem (ex.: x.com)" required>
+        <input type="text" id="addTo" placeholder="destino (ex.: y.com)" required>
+        <div class="row">
+          <select id="addList" class="grow" aria-label="Lista"></select>
+          <select id="addMode" aria-label="Modo">
+            <option value="auto">Automático</option>
+            <option value="manual">Manual</option>
+          </select>
+        </div>
+        <input type="text" id="newListName" placeholder="nome da nova lista" hidden>
+        <label class="row small"><input type="checkbox" id="addKeepPath"> Manter o caminho (x.com/abc → y.com/abc)</label>
+        <button type="submit" class="primary">Adicionar regra</button>
+        <div class="small" id="status"></div>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="small muted" style="margin-bottom:6px">Listas</div>
+      <div class="lists" id="lists"></div>
+    </section>
+  </main>
+
+  <footer>
+    <button id="applyAll" title="Aplica as regras às abas que já estavam abertas">Aplicar nas abas abertas</button>
+    <button id="openOptions">Gerenciar regras</button>
+  </footer>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
